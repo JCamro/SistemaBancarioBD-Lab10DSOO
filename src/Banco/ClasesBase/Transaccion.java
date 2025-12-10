@@ -6,67 +6,52 @@ import java.time.format.DateTimeFormatter;
 public abstract class Transaccion {
     protected double monto;
     protected Cuenta cuenta;
-    protected LocalDateTime fecha;
+    protected String fecha;
     protected Empleado empleado;
     protected Cliente cliente;
     protected int idTransaccion;
-
-    public Transaccion(Cliente cliente, Empleado empleado, Cuenta cuenta, double monto, int idTransaccion) {
+    
+    // Constructor para crear por primera vez una transaccion
+    public Transaccion(Cliente cliente, Empleado empleado, Cuenta cuenta, double monto) {
         this.cliente = cliente;
         this.empleado = empleado;
         this.monto = monto;
         this.cuenta = cuenta;
-        this.fecha = LocalDateTime.now();
-        this.idTransaccion = idTransaccion;
+        
+        LocalDateTime ahora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        this.fecha = ahora.format(formatter);
     }
-
-    // --- Getters y Setters ---
-    public double getMonto() {
-        return monto;
-    }
-
-    public void setMonto(double monto) {
+    
+    // Constructor para recibir una transaccion de la BD
+    public Transaccion(Cliente cliente, Empleado empleado, Cuenta cuenta, double monto, int idTransaccion, String fecha) {
+        this.cliente = cliente;
+        this.empleado = empleado;
         this.monto = monto;
-    }
-    public int getIdTransaccion() {
-        return idTransaccion;
-    }
-    public void setIdTransaccion(int idTransaccion) {
-        this.idTransaccion = idTransaccion;
-    }
-
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
-    }
-
-    public void setFecha(LocalDateTime fecha) {
+        this.idTransaccion = idTransaccion;
         this.fecha = fecha;
     }
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
+    // --- Getters y Setters ---
+    public double getMonto() {return monto;}
+    public void setMonto(double monto) {this.monto = monto;}
+    
+    public int getIdTransaccion() {return idTransaccion;}
+    public void setIdTransaccion(int idTransaccion) {this.idTransaccion = idTransaccion;}
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
+    public Cuenta getCuenta() {return cuenta;}
+    public void setCuenta(Cuenta cuenta) {this.cuenta = cuenta;}
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+    public void setFecha(String fecha) {this.fecha = fecha;}
+    public String getFecha() {return fecha;}
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
+    public Empleado getEmpleado() {return empleado;}
+    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
 
-    public String getFecha() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        return fecha.format(formatter);
-    }
+    public Cliente getCliente() {return cliente;}
+    public void setCliente(Cliente cliente) {this.cliente = cliente;}
+
 
     public void procesar() {
         System.out.println("Procesando Transaccion");

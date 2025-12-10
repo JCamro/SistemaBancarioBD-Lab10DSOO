@@ -11,7 +11,7 @@ public class GestorCuentas {
     private GestorTitularidades gTitularidades;
     private GestorClientes gClientes;
     private CuentaDAO cuentaDAO;
-    private int contadorNroCuenta = 10000;
+    
 
     public GestorCuentas(GestorTitularidades gTitularidades, GestorClientes gClientes) {
         this.gTitularidades = gTitularidades;
@@ -41,8 +41,14 @@ public class GestorCuentas {
         if (claveCuenta<1000 || claveCuenta>9999) {
             throw new BancoException.ValidacionException("CLAVE debe tener solo 4 digitos");
         }
-
-        Cuenta cuenta = new Cuenta(contadorNroCuenta, tipo, 0, claveCuenta);
+        
+        int numeroCuenta = (int) Math.floor((Math.random()*99999-11111 + 11111));
+        
+        while (buscarCuenta(numeroCuenta) != null) {
+            numeroCuenta = (int) Math.floor((Math.random()*99999-11111 + 11111));
+        }
+        
+        Cuenta cuenta = new Cuenta(numeroCuenta, tipo, 0, claveCuenta);
         
         cuentaDAO.insertCuenta(cuenta);
 
@@ -54,7 +60,6 @@ public class GestorCuentas {
             throw e;
         }
 
-        contadorNroCuenta++;
         
         return cuenta;
 

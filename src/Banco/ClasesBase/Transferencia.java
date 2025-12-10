@@ -3,19 +3,26 @@ package Banco.ClasesBase;
 
 public class Transferencia extends Transaccion {
     private Cuenta cuentaDestino;
-
-    public Transferencia(Cliente cliente, Empleado empleado, Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto, int idTransaccion) {
-        super(cliente, empleado, cuentaOrigen, monto, idTransaccion);
+    
+    // Constructor para crear por primera vez una Transferencia Manejada por un Empleado/Admin
+    public Transferencia(Cliente cliente, Empleado empleado, Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto) {
+        super(cliente, empleado, cuentaOrigen, monto);
         this.cuentaDestino = cuentaDestino;
     }
     
-    // Caso en que el Cliente realice la transferencia
-    
-    public Transferencia(Cliente cliente, Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto, int idTransaccion) {
-        super(cliente, null, cuentaOrigen, monto, idTransaccion);
+    // Constructor para crear por primera vez una Transferencia Manejada por cliente
+    public Transferencia(Cliente cliente, Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto) {
+        super(cliente, null, cuentaOrigen, monto);
         this.cuentaDestino = cuentaDestino;
     }
-
+    
+    // Constructor para recibir una transaccion de la BD
+    public Transferencia(Cliente cliente, Empleado empleado, Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto, int idTransaccion, String fecha) {
+        super(cliente, empleado, cuentaOrigen, monto, idTransaccion, fecha);
+        this.cuentaDestino = cuentaDestino;
+    }
+    
+    // METODOS PARA UTILIZAR CON TransaccionDAO
     @Override
     public void procesar() {
 

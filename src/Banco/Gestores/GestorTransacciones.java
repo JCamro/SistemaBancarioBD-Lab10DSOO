@@ -1,34 +1,26 @@
 package Banco.Gestores;
+
 import Banco.BancoExceptions.BancoException;
 import Banco.ClasesBase.*;
+import Banco.BD.ClasesDAO.*;
 
 import java.util.ArrayList;
 
 
 public class GestorTransacciones {
-    private ArrayList<Transaccion> listaTransacciones;
-    private int contadorIdTransaccion;
     private GestorCuentas gCuentas;
     private GestorClientes gClientes;
     private GestorTitularidades gTitularidades;
-
+    private TransaccionesDAO transaccionDAO;
     public GestorTransacciones(GestorCuentas gCuentas, GestorClientes gClientes, GestorTitularidades gTitularidades) {
         this.gCuentas = gCuentas;
         this.gClientes = gClientes;
         this.gTitularidades = gTitularidades;
-        this.listaTransacciones = new ArrayList<>();
-        this.contadorIdTransaccion = 1;
+        this.transaccionDAO = new TransaccionesDAO();
     }
 
     // ========== DEPÓSITO ==========
-    public Deposito procesarDeposito(Usuario usuarioActual, String numeroCuenta, String monto, String dniCliente, String claveCuenta) throws BancoException {
-        
-        // Validar permisos
-        if (!(usuarioActual instanceof Cliente) && 
-            !(usuarioActual instanceof Empleado) && 
-            !(usuarioActual instanceof Admin)) {
-            throw new BancoException.PermisosDenegadosException("Usuario no autorizado para realizar depósitos");
-        }
+    public Deposito procesarDeposito(Usuario usuarioActual, String numeroCuenta, String monto, String dniCliente, String claveCuenta) throws Exception {
 
         // Validar y parsear datos
         int numCuenta = validarStringNumericoInt(numeroCuenta);
@@ -70,42 +62,16 @@ public class GestorTransacciones {
         if (titularidad == null) {
             throw new BancoException.PermisosDenegadosException("El cliente no es titular de esta cuenta");
         }
-
-        // Validar permisos específicos por tipo de usuario
-        if (usuarioActual instanceof Cliente) {
-            Cliente clienteActual = (Cliente) usuarioActual;
-            if (clienteActual.getDni() != cliente.getDni()) {
-                throw new BancoException.PermisosDenegadosException("Solo puedes depositar en tus propias cuentas");
-            }
-        }
-
-        // Procesar depósito
-        Deposito deposito;
-        if (usuarioActual instanceof Empleado) {
-            deposito = new Deposito(cliente, (Empleado) usuarioActual, cuenta, montoDeposito, contadorIdTransaccion);
-        } else {
-            deposito = new Deposito(cliente, cuenta, montoDeposito, contadorIdTransaccion);
-        }
-
-        deposito.procesar();
-        cliente.añadirTransaccion(deposito);
-        cuenta.añadirTransaccion(deposito);
-        listaTransacciones.add(deposito);
-        contadorIdTransaccion++;
+        
+        Deposito deposito = new Deposito(cliente, (Empleado) usuarioActual, cuenta, montoDeposito);
+        
+        transaccionDAO.procederTransaccion(deposito);
 
         return deposito;
     }
 
     // ========== RETIRO ==========
-    public Retiro procesarRetiro(Usuario usuarioActual, String numeroCuenta, String monto, 
-                                 String dniCliente, String claveCuenta) throws BancoException {
-        
-        // Validar permisos
-        if (!(usuarioActual instanceof Cliente) && 
-            !(usuarioActual instanceof Empleado) && 
-            !(usuarioActual instanceof Admin)) {
-            throw new BancoException.PermisosDenegadosException("Usuario no autorizado para realizar retiros");
-        }
+    public Retiro procesarRetiro(Usuario usuarioActual, String numeroCuenta, String monto, String dniCliente, String claveCuenta) throws Exception {
 
         // Validar y parsear datos
         int numCuenta = validarStringNumericoInt(numeroCuenta);
@@ -155,35 +121,16 @@ public class GestorTransacciones {
             );
         }
 
-        // Validar permisos específicos
-        if (usuarioActual instanceof Cliente) {
-            Cliente clienteActual = (Cliente) usuarioActual;
-            if (clienteActual.getDni() != cliente.getDni()) {
-                throw new BancoException.PermisosDenegadosException("Solo puedes retirar de tus propias cuentas");
-            }
-        }
-
         // Procesar retiro
-        Retiro retiro;
-        if (usuarioActual instanceof Empleado) {
-            retiro = new Retiro(cliente, (Empleado) usuarioActual, cuenta, montoRetiro, contadorIdTransaccion, clave);
-        } else {
-            retiro = new Retiro(cliente, null, cuenta, montoRetiro, contadorIdTransaccion, clave);
-        }
-
-        retiro.procesar();
-        cliente.añadirTransaccion(retiro);
-        cuenta.añadirTransaccion(retiro);
-        listaTransacciones.add(retiro);
-        contadorIdTransaccion++;
+        Retiro retiro = new Retiro((Empleado) usuarioActual, cliente, cuenta, montoRetiro);
+        
+        transaccionDAO.procederTransaccion(retiro);
 
         return retiro;
     }
 
     // ========== TRANSFERENCIA ==========
-    public Transferencia procesarTransferencia(Usuario usuarioActual, String numeroCuentaOrigen, String numeroCuentaDestino, String monto, String dniCliente, String claveCuenta) throws BancoException {
-        
-        
+    public Transferencia procesarTransferencia(Usuario usuarioActual, String numeroCuentaOrigen, String numeroCuentaDestino, String monto, String dniCliente, String claveCuenta) throws Exception {
 
         // Validar y parsear datos
         int numCuentaOrigen = validarStringNumericoInt(numeroCuentaOrigen);
@@ -228,6 +175,7 @@ public class GestorTransacciones {
 
         // Validar titularidad
         Titularidad titularidadOrigen = gTitularidades.buscarTitularidad(cliente, cuentaOrigen);
+        
         if (titularidadOrigen == null) {
             throw new BancoException.PermisosDenegadosException("El cliente no es titular de la cuenta origen");
         }
@@ -239,28 +187,22 @@ public class GestorTransacciones {
             );
         }
         
-        
         // Procesar transferencia
         Transferencia transferencia;
         if (usuarioActual instanceof Cliente) {
-            
-            transferencia = new Transferencia((Cliente) usuarioActual, cuentaOrigen, cuentaDestino, montoTransf, contadorIdTransaccion);
+            transferencia = new Transferencia((Cliente) usuarioActual, cuentaOrigen, cuentaDestino, montoTransf);
         }
-        
         else  {
-            transferencia = new Transferencia(cliente, (Empleado) usuarioActual, cuentaOrigen, cuentaDestino, montoTransf, contadorIdTransaccion);
+            transferencia = new Transferencia(cliente, (Empleado) usuarioActual, cuentaOrigen, cuentaDestino, montoTransf);
         }
 
-        transferencia.procesar();
-        cliente.añadirTransaccion(transferencia);
-        cuentaOrigen.añadirTransaccion(transferencia);
-        cuentaDestino.añadirTransaccion(transferencia);
-        listaTransacciones.add(transferencia);
-        contadorIdTransaccion++;
+        transaccionDAO.procederTransaccion(transferencia);
 
         return transferencia;
     }
 
+    
+    /*
     // ========== CONSULTAR MOVIMIENTOS DE CUENTA ==========
     public ArrayList<Transaccion> obtenerMovimientosCuenta(Usuario usuarioActual, String numeroCuenta, 
                                                            String dniCliente) throws BancoException {
@@ -301,6 +243,9 @@ public class GestorTransacciones {
         return new ArrayList<>(cuenta.getTransacciones());
     }
 
+    
+    
+    
     // ========== CONSULTAR MOVIMIENTOS DE CLIENTE ==========
     public ArrayList<Transaccion> obtenerMovimientosCliente(Usuario usuarioActual, 
                                                             String dniCliente) throws BancoException {
@@ -333,9 +278,17 @@ public class GestorTransacciones {
 
         return new ArrayList<>(listaTransacciones);
     }
-
-    // ========== MÉTODOS AUXILIARES PRIVADOS ==========
+    // ========== GETTERS ==========
     
+    public ArrayList<Transaccion> getListaTransacciones() {
+        return new ArrayList<>(listaTransacciones);
+    }
+    
+    */
+
+    
+    
+    // ========== MÉTODOS AUXILIARES PRIVADOS ==========
     private int validarStringNumericoInt(String numero) {
         try {
             return Integer.parseInt(numero.trim());
@@ -353,13 +306,6 @@ public class GestorTransacciones {
         }
     }
 
-    // ========== GETTERS ==========
     
-    public ArrayList<Transaccion> getListaTransacciones() {
-        return new ArrayList<>(listaTransacciones);
-    }
 
-    public int getContadorIdTransaccion() {
-        return contadorIdTransaccion;
-    }
 }

@@ -232,11 +232,11 @@ public class Pnl_Transferir extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -258,6 +258,8 @@ public class Pnl_Transferir extends javax.swing.JPanel {
         montoEntrada.setText("");
         origenEntrada.setText("");
         destinoEntrada.setText("");
+        boletaTransferencia.setVisible(false);
+        avisoFondo.setText("");
     }
     
     private void boletaTransferenciaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_boletaTransferenciaComponentHidden
@@ -278,9 +280,10 @@ public class Pnl_Transferir extends javax.swing.JPanel {
             cuentaDestinoL.setText(cuentaDestino);
             montoL.setText(monto);
             dniCliente.setText(String.valueOf(usuarioActual.getDni()));
+            boletaTransferencia.setVisible(true);
+            avisoFondo.setText("");
             
         } catch(Exception e) {
-            limpiar();
             avisoFondo.setText(e.getMessage());
         }
         

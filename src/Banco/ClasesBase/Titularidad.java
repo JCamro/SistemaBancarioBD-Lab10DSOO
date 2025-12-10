@@ -18,7 +18,6 @@ public class Titularidad {
         LocalDateTime ahora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         this.fechaCreacion = ahora.format(formatter);
-        this.idTitularidad = idTitularidad;
     }
     
     public Titularidad(String tipo, Cliente cliente, Cuenta cuenta, String fechaCreacion) {
@@ -26,7 +25,6 @@ public class Titularidad {
         this.cliente = cliente;
         this.cuenta = cuenta;
         this.fechaCreacion = fechaCreacion;
-        this.idTitularidad = idTitularidad;
     }
 
     // --- Getters y Setters ---

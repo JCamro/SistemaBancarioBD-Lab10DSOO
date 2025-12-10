@@ -33,7 +33,7 @@ public class GestorClientes {
         if (dniCliente < 10000000 || dniCliente > 99999999) {
             throw new BancoException.ValidacionException("Formato de DNI debe tener 8 numeros");
         }
-        if (clienteDAO.selectPorDni(dniCliente) != null) {
+        if (buscarCliente(dniCliente) != null) {
             throw new BancoException.DuplicadoException("DNI ingresado ya esta asociado a un Cliente existente");
         }
         if (edadCliente < 18 || edadCliente > 120) {
@@ -42,7 +42,7 @@ public class GestorClientes {
         if (!validarStringNoVacio(correo)) {
             throw new BancoException.ValidacionException("Correo ingresado no debe ser vacio");
         }
-        if (clienteDAO.selectPorCorreo(correo) != null) {
+        if (buscarCliente(correo) != null) {
             throw new BancoException.DuplicadoException("Correo ya registrado anteriormente");
         }
         if (!esEmailValido(correo)) {
@@ -120,6 +120,10 @@ public class GestorClientes {
     public Cliente buscarCliente(int dni) {
         return clienteDAO.selectPorDni(dni);
     }
+    
+    public Cliente buscarCliente(String correo) {
+        return clienteDAO.selectPorCorreo(correo);
+    }
 
     public int validarStringNumericoInt(String numero) {
         int numeroParseado;
@@ -152,8 +156,6 @@ public class GestorClientes {
         }
         return true;
     }
-
-    
 
     public boolean esEmailValido(String correo) {
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"; //especificar caracteres que puede contener un email y su estructura

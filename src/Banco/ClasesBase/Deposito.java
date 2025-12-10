@@ -2,15 +2,17 @@ package Banco.ClasesBase;
 
 public class Deposito extends Transaccion {
 
-    public Deposito(Cliente cliente, Empleado empleado, Cuenta cuenta, double monto, int idTransaccion) {
-        super(cliente, empleado, cuenta, monto, idTransaccion);
+    // Constructor para crear por primera vez un Deposito
+    public Deposito(Cliente cliente, Empleado empleado, Cuenta cuenta, double monto) {
+        super(cliente, empleado, cuenta, monto);
     }
     
-    public Deposito(Cliente cliente, Cuenta cuenta, double monto, int idTransaccion) {
-        super(cliente, null, cuenta, monto, idTransaccion);
+    // Constructor para recibir una transaccion de la BD
+    public Deposito(Cliente cliente, Empleado empleado, Cuenta cuenta, double monto, int idTransaccion, String fecha) {
+        super(cliente, empleado, cuenta, monto, idTransaccion, fecha);
     }
 
-
+    // METODOS PARA UTILIZAR CON TransaccionDAO
     @Override
     public void procesar() {
         cuenta.setSaldo(cuenta.getSaldo()+monto);

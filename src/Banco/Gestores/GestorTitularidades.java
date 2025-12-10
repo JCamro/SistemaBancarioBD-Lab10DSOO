@@ -10,14 +10,12 @@ import java.util.ArrayList;
 public class GestorTitularidades {
     
     private TitularidadDAO titularidadDAO;
-    private CuentaDAO cuentaDAO;
     private GestorCuentas gCuentas;
     private GestorClientes gClientes;
 
     // Constructor sin parámetros
     public GestorTitularidades() {
         this.titularidadDAO = new TitularidadDAO();
-        this.cuentaDAO = new CuentaDAO();
     }
 
     // Setters para inyectar las dependencias
@@ -30,7 +28,7 @@ public class GestorTitularidades {
     }
     
     
-    
+    /*
     //FALTA IMPLEMENTAR EN INTERFAZ
     // -- AGREGAR TITULAR A CUENTA --
     public Titularidad agregarTitularidad(String dni, String numeroCuenta) throws Exception { 
@@ -70,9 +68,12 @@ public class GestorTitularidades {
         
         return titularidad;
     }
-
+    */
     
-    
+    // Busca si hay una titularidad entre un cliente y una cuenta
+    public Titularidad buscarTitularidad(Cliente cliente, Cuenta cuenta) {
+        return titularidadDAO.selectTitularidad(cliente, cuenta);
+    }
     
     // -- METODO PARA CREAR TITULARIDAD CUANDO SE ABRE UNA CUENTA --
     public void agregarPrimeraTitularidad(Titularidad nTitularidad) throws Exception {
@@ -83,16 +84,12 @@ public class GestorTitularidades {
         }
     }
 
-    // Elimina una titularidad del registro
+    // Elimina una titularidad del registro     // AUN NO UTILIZADO
     public void eliminarTitularidad(Titularidad titularidad) {
         titularidadDAO.deleteTitularidad(titularidad.getCliente(), titularidad.getCuenta());
     }
 
 
-    // Busca si hay una titularidad entre un cliente y una cuenta
-    public Titularidad buscarTitularidad(Cliente cliente, Cuenta cuenta) {
-        return titularidadDAO.selectTitularidad(cliente, cuenta);
-    }
 
     /*
     // Array de las titularidades de un Cliente
@@ -106,7 +103,6 @@ public class GestorTitularidades {
 
     }
     */
-
 
     public int validarStringNumericoInt(String numero) {
         int numeroParseado;
