@@ -2,6 +2,7 @@ package InterfazGrafica.panelAdmin;
 
 import Banco.ClasesBase.*;
 import Banco.GestorPrincipal.Banco;
+import InterfazGrafica.TablaTransacciones;
 import InterfazGrafica.panelAdmin.PanelesMetodos.*;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
     private Pnl_Admin_Retiro retiro;
     private Pnl_Admin_Deposito deposito;
     private Pnl_Admin_Consultar_Cuenta consultarCuenta;
+    private TabTransacciones transacciones;
             
     private CardLayout vista;
     
@@ -49,6 +51,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         retiro = new Pnl_Admin_Retiro(banco, usuarioActual);
         deposito = new Pnl_Admin_Deposito(banco, usuarioActual);
         consultarCuenta = new Pnl_Admin_Consultar_Cuenta(banco, usuarioActual);
+        transacciones = new TabTransacciones();
 
     }
 
@@ -70,12 +73,14 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnDeposito = new javax.swing.JButton();
         btnRetirar = new javax.swing.JButton();
         btnAbrirCuenta1 = new javax.swing.JButton();
+        btnMostrarTransacciones = new javax.swing.JButton();
         Pnl_Vista_Principal = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnBuscarCliente.setBackground(new java.awt.Color(204, 0, 0));
         btnBuscarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -84,6 +89,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnBuscarCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscarCliente.setBorderPainted(false);
         btnBuscarCliente.addActionListener(this::btnBuscarClienteActionPerformed);
+        jPanel2.add(btnBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 195, -1));
 
         btnCerrarSesion.setBackground(new java.awt.Color(204, 0, 0));
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -92,11 +98,12 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnCerrarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCerrarSesion.setBorderPainted(false);
         btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
+        jPanel2.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 633, 195, 45));
 
         iconoCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        iconoCliente.setForeground(new java.awt.Color(0, 0, 0));
         iconoCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iconoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/icono_usuario.png"))); // NOI18N
+        jPanel2.add(iconoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 12, 107, 102));
 
         btnBuscarEmpleado.setBackground(new java.awt.Color(204, 0, 0));
         btnBuscarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -105,6 +112,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnBuscarEmpleado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscarEmpleado.setBorderPainted(false);
         btnBuscarEmpleado.addActionListener(this::btnBuscarEmpleadoActionPerformed);
+        jPanel2.add(btnBuscarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 195, -1));
 
         btnRegistrarCliente.setBackground(new java.awt.Color(204, 0, 0));
         btnRegistrarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -113,6 +121,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnRegistrarCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegistrarCliente.setBorderPainted(false);
         btnRegistrarCliente.addActionListener(this::btnRegistrarClienteActionPerformed);
+        jPanel2.add(btnRegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 195, -1));
 
         btnEliminarCliente.setBackground(new java.awt.Color(204, 0, 0));
         btnEliminarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -121,6 +130,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnEliminarCliente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminarCliente.setBorderPainted(false);
         btnEliminarCliente.addActionListener(this::btnEliminarClienteActionPerformed);
+        jPanel2.add(btnEliminarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 195, -1));
 
         btnRegistrarEmpleado.setBackground(new java.awt.Color(204, 0, 0));
         btnRegistrarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -129,6 +139,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnRegistrarEmpleado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegistrarEmpleado.setBorderPainted(false);
         btnRegistrarEmpleado.addActionListener(this::btnRegistrarEmpleadoActionPerformed);
+        jPanel2.add(btnRegistrarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 195, -1));
 
         btnEliminarEmpleado.setBackground(new java.awt.Color(204, 0, 0));
         btnEliminarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -137,6 +148,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnEliminarEmpleado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminarEmpleado.setBorderPainted(false);
         btnEliminarEmpleado.addActionListener(this::btnEliminarEmpleadoActionPerformed);
+        jPanel2.add(btnEliminarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 195, -1));
 
         btnAbrirCuenta.setBackground(new java.awt.Color(204, 0, 0));
         btnAbrirCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -145,10 +157,11 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnAbrirCuenta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAbrirCuenta.setBorderPainted(false);
         btnAbrirCuenta.addActionListener(this::btnAbrirCuentaActionPerformed);
+        jPanel2.add(btnAbrirCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 195, -1));
 
         nombreAdmin.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
-        nombreAdmin.setForeground(new java.awt.Color(0, 0, 0));
         nombreAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(nombreAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 120, 195, 33));
 
         btnDeposito.setBackground(new java.awt.Color(204, 0, 0));
         btnDeposito.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -157,6 +170,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnDeposito.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDeposito.setBorderPainted(false);
         btnDeposito.addActionListener(this::btnDepositoActionPerformed);
+        jPanel2.add(btnDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 195, -1));
 
         btnRetirar.setBackground(new java.awt.Color(204, 0, 0));
         btnRetirar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -165,6 +179,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnRetirar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRetirar.setBorderPainted(false);
         btnRetirar.addActionListener(this::btnRetirarActionPerformed);
+        jPanel2.add(btnRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 195, -1));
 
         btnAbrirCuenta1.setBackground(new java.awt.Color(204, 0, 0));
         btnAbrirCuenta1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -173,64 +188,16 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         btnAbrirCuenta1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAbrirCuenta1.setBorderPainted(false);
         btnAbrirCuenta1.addActionListener(this::btnAbrirCuenta1ActionPerformed);
+        jPanel2.add(btnAbrirCuenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 195, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscarEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnEliminarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnEliminarEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnAbrirCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnDeposito, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnRetirar, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(btnCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAbrirCuenta1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                            .addComponent(nombreAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(iconoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(iconoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombreAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscarCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrarCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminarCliente)
-                .addGap(27, 27, 27)
-                .addComponent(btnBuscarEmpleado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrarEmpleado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminarEmpleado)
-                .addGap(27, 27, 27)
-                .addComponent(btnAbrirCuenta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAbrirCuenta1)
-                .addGap(26, 26, 26)
-                .addComponent(btnDeposito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRetirar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
+        btnMostrarTransacciones.setBackground(new java.awt.Color(204, 0, 0));
+        btnMostrarTransacciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnMostrarTransacciones.setForeground(new java.awt.Color(255, 255, 255));
+        btnMostrarTransacciones.setText("Transacciones");
+        btnMostrarTransacciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMostrarTransacciones.setBorderPainted(false);
+        btnMostrarTransacciones.addActionListener(this::btnMostrarTransaccionesActionPerformed);
+        jPanel2.add(btnMostrarTransacciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 195, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -348,6 +315,14 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
         this.repaint();
     }//GEN-LAST:event_btnAbrirCuenta1ActionPerformed
 
+    private void btnMostrarTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTransaccionesActionPerformed
+        Pnl_Vista_Principal.add(transacciones, "mostrarTransacciones");
+        transacciones.recargarTablaTransacciones();
+        vista.show(Pnl_Vista_Principal, "mostrarTransacciones");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
+    }//GEN-LAST:event_btnMostrarTransaccionesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pnl_Vista_Principal;
@@ -359,6 +334,7 @@ public class Pnl_Menu_Admin extends javax.swing.JPanel {
     private javax.swing.JButton btnDeposito;
     private javax.swing.JButton btnEliminarCliente;
     private javax.swing.JButton btnEliminarEmpleado;
+    private javax.swing.JButton btnMostrarTransacciones;
     private javax.swing.JButton btnRegistrarCliente;
     private javax.swing.JButton btnRegistrarEmpleado;
     private javax.swing.JButton btnRetirar;
