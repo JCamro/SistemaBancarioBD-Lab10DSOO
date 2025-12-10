@@ -40,7 +40,6 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
         fechaApertura = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(204, 0, 0));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Leelawadee", 1, 48)); // NOI18N
@@ -51,17 +50,14 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
         jLabel1.setBounds(6, 21, 910, 70);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Ingrese Datos Solicitados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Leelawadee", 1, 24), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Ingrese Datos Solicitados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Leelawadee", 1, 24))); // NOI18N
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setFont(new java.awt.Font("Leelawadee", 1, 24)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Nroº Cuenta: ");
         jPanel6.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 170, 43));
 
-        entradaNumCuenta.setBackground(new java.awt.Color(255, 255, 255));
         entradaNumCuenta.setFont(new java.awt.Font("Leelawadee", 1, 14)); // NOI18N
-        entradaNumCuenta.setForeground(new java.awt.Color(0, 0, 0));
         entradaNumCuenta.addActionListener(this::entradaNumCuentaActionPerformed);
         jPanel6.add(entradaNumCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 230, -1));
 
@@ -89,7 +85,7 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
         jPanel6.add(avisoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 500, 40));
 
         contratoCuenta.setBackground(new java.awt.Color(255, 255, 255));
-        contratoCuenta.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 0), 3, true), "Contrato de Apertura de Cuenta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 36), new java.awt.Color(0, 0, 0))); // NOI18N
+        contratoCuenta.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 0), 3, true), "Contrato de Apertura de Cuenta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 36))); // NOI18N
         contratoCuenta.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
                 contratoCuentaComponentHidden(evt);
@@ -98,32 +94,27 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
         contratoCuenta.setLayout(null);
 
         jLabel24.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("Numero de Cuenta:");
         contratoCuenta.add(jLabel24);
         jLabel24.setBounds(117, 76, 165, 28);
 
         jLabel25.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
         jLabel25.setText("Tipo de Cuenta:");
         contratoCuenta.add(jLabel25);
         jLabel25.setBounds(117, 131, 135, 28);
 
         jLabel27.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
         jLabel27.setText("Saldo:");
         contratoCuenta.add(jLabel27);
         jLabel27.setBounds(117, 184, 134, 28);
 
         jLabel28.setFont(new java.awt.Font("Leelawadee", 1, 18)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("Fecha de Apertura:");
         contratoCuenta.add(jLabel28);
         jLabel28.setBounds(117, 230, 280, 28);
 
         saldoCuenta.setBackground(new java.awt.Color(0, 153, 153));
         saldoCuenta.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        saldoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         saldoCuenta.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         saldoCuenta.setText(".");
         saldoCuenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -132,7 +123,6 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
 
         numCuenta.setBackground(new java.awt.Color(0, 153, 153));
         numCuenta.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        numCuenta.setForeground(new java.awt.Color(0, 0, 0));
         numCuenta.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         numCuenta.setText(".");
         numCuenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -141,7 +131,6 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
 
         tipoCuenta.setBackground(new java.awt.Color(0, 153, 153));
         tipoCuenta.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        tipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         tipoCuenta.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         tipoCuenta.setText(".");
         tipoCuenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -150,7 +139,6 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
 
         fechaApertura.setBackground(new java.awt.Color(0, 153, 153));
         fechaApertura.setFont(new java.awt.Font("Leelawadee", 0, 18)); // NOI18N
-        fechaApertura.setForeground(new java.awt.Color(0, 0, 0));
         fechaApertura.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         fechaApertura.setText(".");
         fechaApertura.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -166,11 +154,11 @@ public class Pnl_ConsultarCuenta extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -30,6 +30,10 @@ public class Cuenta {
         setClave(clave);
         this.fechaApertura = fechaApertura;
     }
+    
+    public Cuenta(int numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
+    }
     //SETTERS
     public void setNumeroCuenta(int numeroCuenta) {this.numeroCuenta = numeroCuenta;}
     public void setSaldo(double saldo) {this.saldo = saldo;}

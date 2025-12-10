@@ -15,7 +15,12 @@ public class Cliente extends Usuario {
         super(nombres, dni, edad, correo, contraseña, fecha);
         this.transaccionesCliente = new ArrayList<>();
     }
-
+    
+    public Cliente(int dni) {
+        super(null, dni, 0, null, null);  // valores por defecto
+        this.transaccionesCliente = new ArrayList<>();
+    }
+    
     public void añadirTransaccion(Transaccion transaccion) {
         transaccionesCliente.add(transaccion);
     }

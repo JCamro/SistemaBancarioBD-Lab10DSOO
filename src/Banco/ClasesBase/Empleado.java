@@ -10,6 +10,10 @@ public class Empleado extends Usuario {
         super(nombres, dni, edad, correo, contraseña, fecha);
     }
     
+    public Empleado(int dni) {
+        super(null, dni, 0, null, null); // o como tengas Usuario
+    }
+    
 
     @Override
     public void mostrarPermisos() {

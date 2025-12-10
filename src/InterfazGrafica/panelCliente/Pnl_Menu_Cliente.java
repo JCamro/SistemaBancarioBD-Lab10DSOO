@@ -14,6 +14,7 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
 
     private Pnl_ConsultarCuenta consultarCuenta;
     private Pnl_Transferir transferencia;
+    private ConsultarTransacciones transacciones;
 
     private CardLayout vista;
 
@@ -32,6 +33,7 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
     private void inicializarPaneles() {
         consultarCuenta = new Pnl_ConsultarCuenta(banco, usuarioActual);
         transferencia = new Pnl_Transferir(banco, usuarioActual);
+        transacciones = new ConsultarTransacciones();
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +46,7 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
         btnCerrarSesion = new javax.swing.JButton();
         iconoCliente = new javax.swing.JLabel();
         nombreCliente = new javax.swing.JLabel();
+        btnConsultarTransacciones = new javax.swing.JButton();
         Pnl_Vista_Principal = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -51,6 +54,7 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnConsultarCuenta.setBackground(new java.awt.Color(204, 0, 0));
         btnConsultarCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -59,6 +63,7 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
         btnConsultarCuenta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConsultarCuenta.setBorderPainted(false);
         btnConsultarCuenta.addActionListener(this::btnConsultarCuentaActionPerformed);
+        jPanel2.add(btnConsultarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 195, 67));
 
         btnTransferencia.setBackground(new java.awt.Color(204, 0, 0));
         btnTransferencia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -67,6 +72,7 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
         btnTransferencia.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnTransferencia.setBorderPainted(false);
         btnTransferencia.addActionListener(this::btnTransferenciaActionPerformed);
+        jPanel2.add(btnTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 195, 67));
 
         btnCerrarSesion.setBackground(new java.awt.Color(204, 0, 0));
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -75,49 +81,25 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
         btnCerrarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCerrarSesion.setBorderPainted(false);
         btnCerrarSesion.addActionListener(this::btnCerrarSesionActionPerformed);
+        jPanel2.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 611, 195, 67));
 
         iconoCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        iconoCliente.setForeground(new java.awt.Color(0, 0, 0));
         iconoCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iconoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/icono_usuario.png"))); // NOI18N
+        jPanel2.add(iconoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 16, -1, -1));
 
         nombreCliente.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
-        nombreCliente.setForeground(new java.awt.Color(0, 0, 0));
         nombreCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(nombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 128, 195, 40));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnConsultarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(iconoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(iconoCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnConsultarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
+        btnConsultarTransacciones.setBackground(new java.awt.Color(204, 0, 0));
+        btnConsultarTransacciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConsultarTransacciones.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarTransacciones.setText("Transacciones");
+        btnConsultarTransacciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConsultarTransacciones.setBorderPainted(false);
+        btnConsultarTransacciones.addActionListener(this::btnConsultarTransaccionesActionPerformed);
+        jPanel2.add(btnConsultarTransacciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 195, 67));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -158,17 +140,27 @@ public class Pnl_Menu_Cliente extends javax.swing.JPanel {
     // Consultar Cuenta Boton
     private void btnConsultarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarCuentaActionPerformed
         // TODO add your handling code here:
+        int dni = usuarioActual.getDni(); // o getCliente().getDni() si aplica
+        transacciones.mostrarTransaccionesDeCliente(dni);      // llena la JTable
         Pnl_Vista_Principal.add(consultarCuenta, "consultar");
         vista.show(Pnl_Vista_Principal, "consultar");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
     }//GEN-LAST:event_btnConsultarCuentaActionPerformed
 
+    private void btnConsultarTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarTransaccionesActionPerformed
+        Pnl_Vista_Principal.add(transacciones, "consultarTransacciones");
+        vista.show(Pnl_Vista_Principal, "consultarTransacciones");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
+    }//GEN-LAST:event_btnConsultarTransaccionesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pnl_Vista_Principal;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnConsultarCuenta;
+    private javax.swing.JButton btnConsultarTransacciones;
     private javax.swing.JButton btnTransferencia;
     private javax.swing.JLabel iconoCliente;
     private javax.swing.JPanel jPanel2;

@@ -3,6 +3,7 @@ package Banco.BD.ClasesDAO;
 import java.sql.*;
 import Banco.BD.ConexionBD;
 import Banco.ClasesBase.*;
+import java.util.ArrayList;
 
 public class TransaccionesDAO {
     
@@ -131,6 +132,58 @@ public class TransaccionesDAO {
             psSuma.setInt(2, transferencia.getCuentaDestino().getNumeroCuenta());
             if (psSuma.executeUpdate() == 0) throw new SQLException("Cuenta destino no válida");
         }
+    }
+    
+    public ArrayList<Transaccion> listarTransaccionesPorCliente(int dniCliente) throws Exception {
+    ArrayList<Transaccion> lista = new ArrayList<>();
+
+        String sql = "SELECT t.* FROM transacciones t " +
+                     "INNER JOIN titularidad tit ON t.numero_cuenta = tit.numero_cuenta " +
+                     "WHERE tit.dni_cliente = ? " +
+                     "ORDER BY t.id_transaccion DESC";
+
+        try (Connection con = ConexionBD.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, dniCliente);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id_transaccion");
+                    double monto = rs.getDouble("monto");
+                    String fecha = rs.getString("fecha_registro");
+                    String tipo = rs.getString("tipo_transaccion");
+                    int numCuenta = rs.getInt("numero_cuenta");
+                    int dniEmp = rs.getInt("dni_empleado");
+
+                    Cliente cliente = new Cliente(dniCliente);
+
+                    Cuenta cuenta = new Cuenta(numCuenta);
+
+                    Empleado empleado = null;
+                    if (dniEmp != 0) {
+                        empleado = new Empleado(dniEmp);
+                    }
+
+                    Transaccion trans = null;
+                    if ("DEPOSITO".equals(tipo)) {
+                        trans = new Deposito(cliente, empleado, cuenta, monto, id, fecha);
+                    } else if ("RETIRO".equals(tipo)) {
+                        trans = new Retiro(empleado, cliente, cuenta, monto, id, fecha);
+                    } else if ("TRANSFERENCIA".equals(tipo)) {
+                        int numDestino = rs.getInt("numero_cuenta_destino");
+                        Cuenta cuentaDestino = new Cuenta(numDestino);
+                        trans = new Transferencia(cliente, empleado, cuenta, cuentaDestino, monto, id, fecha);
+                    }
+
+                    if (trans != null) {
+                        lista.add(trans);
+                    }
+                }
+            }
+        }
+
+        return lista;
     }
     
     // METODO PARA DEVOLVER UN ARRAYLIST DE MOVIMIENTOS
